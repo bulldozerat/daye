@@ -1,8 +1,12 @@
 import xml2js from 'xml2js';
+import cloneDeep from 'lodash/cloneDeep';
+
 const xmlParser = new xml2js.Parser({ explicitArray: false });
 
 export const normalizePackagesData = (data) => {
-  return data.map((info) => {
+  const clonedData = cloneDeep(data);
+
+  return clonedData.map((info) => {
     if (info?.tampons && typeof info.tampons === 'string') {
       xmlParser.parseString(info.tampons, function (err, result) {
         info.tampons = result.tapons.tampon?.length ? [...result.tapons.tampon] : [result.tapons.tampon];
