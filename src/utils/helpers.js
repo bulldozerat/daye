@@ -22,3 +22,14 @@ export const normalizePackagesData = (data) => {
     return info;
   });
 };
+
+export const getAllUnique = (packagesData, type) => {
+  const typeArray = [];
+
+  packagesData.forEach(({ tapons, tampons }) => {
+    const tamponsData = tapons || tampons;
+    tamponsData.forEach((tampon) => typeArray.push(type === 'sizes' ? tampon.size : tampon.coating));
+  });
+
+  return new Set(typeArray);
+};

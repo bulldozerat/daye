@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import getPackages from '../../apis/get-packages';
-import { normalizePackagesData } from '../../utils/helpers';
+import { normalizePackagesData, getAllUnique } from '../../utils/helpers';
 
 import PackageTable from './PackageTable';
 import PageTitle from '../../components/PageTitle';
@@ -9,11 +9,13 @@ import PackageFilters from './PackageFilters';
 
 const PackagesContainer = () => {
   const [packagesData, setPackagesData] = useState(null);
+  const [renderPackagesData, setRenderPackagesData] = useState(null);
 
   const fetchPackagesData = async () => {
     const data = await getPackages();
     const normalizedPackagesData = normalizePackagesData(data);
 
+    setRenderPackagesData(normalizedPackagesData);
     setPackagesData(normalizedPackagesData);
   };
 
@@ -23,13 +25,22 @@ const PackagesContainer = () => {
 
   if (!packagesData) return 'loading...';
 
-  console.log('packagesData: ', JSON.stringify(packagesData));
+  console.log('packagesData: ', packagesData);
+
+  const allUniqueSizes = getAllUnique(renderPackagesData, 'sizes');
+  const allUniqueCoatings = getAllUnique(renderPackagesData);
 
   return (
     <>
       <PageTitle>Page Title</PageTitle>
-      <PackageFilters />
-      <PackageTable packagesData={packagesData} />
+      <PackageFilters
+        packagesData={packagesData}
+        allUniqueSizes={allUniqueSizes}
+        allUniqueCoatings={allUniqueCoatings}
+        renderPackagesData={renderPackagesData}
+        setRenderPackagesData={setRenderPackagesData}
+      />
+      <PackageTable renderPackagesData={renderPackagesData} />
     </>
   );
 };

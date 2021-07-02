@@ -1,9 +1,9 @@
 import { PackageItemRow, PriceWrapper, TamponInfoWrapper } from './PackageTableStyles';
 
-const PackageTable = ({ packagesData }) => {
+const PackageTable = ({ renderPackagesData }) => {
   return (
     <div>
-      {packagesData.map((packageData) => {
+      {renderPackagesData.map((packageData) => {
         const { productImage, price, currency, tapons, tampons } = packageData;
         const tamponsData = tapons || tampons;
 
