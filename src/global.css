@@ -1,0 +1,15 @@
+html {
+  /* 1rem = 10px */
+  font-size: 62.5%;
+}
+
+body {
+  max-width: 120rem;
+  box-sizing: border-box;
+  margin: 2rem auto;
+  font-size: 1.6rem;
+  font-family: 'Roboto';
+  background: #f7f7f7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
