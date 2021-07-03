@@ -1,12 +1,6 @@
 import { useState } from 'react';
 
-const PackageFilters = ({
-  packagesData,
-  allUniqueSizes,
-  allUniqueCoatings,
-  setRenderPackagesData,
-  renderPackagesData,
-}) => {
+const PackageFilters = ({ packagesData, allUniqueSizes, allUniqueCoatings, setRenderPackagesData }) => {
   const [selectedSize, setSelectedSize] = useState('all');
   const [selectedCoating, setSelectedCoating] = useState('all');
 
@@ -15,34 +9,32 @@ const PackageFilters = ({
     const changedFilterFalue = e.target.value;
     const otherFilterValue = isSize ? selectedCoating : selectedSize;
 
-    // current filter is all
+    // changed filter is all
     if (changedFilterFalue === 'all') {
       // both filters are all render all data
       if (otherFilterValue === 'all') {
-        console.log('Render all data both are all');
         setRenderPackagesData(packagesData);
-        return;
       }
 
-      // if second filter is not all
+      // second filter is not all
       if (otherFilterValue !== 'all') {
         // filter whole data for cases with otherFilterValue only
         const filteredPackagesData = packagesData.filter((packageData) => {
           const tamponsData = packageData.tapons || packageData.tampons;
           const isTamponFound = tamponsData.find((tampon) =>
-            isSize ? tampon.size === otherFilterValue : tampon.coating === otherFilterValue
+            isSize ? tampon.coating === otherFilterValue : tampon.size === otherFilterValue
           );
 
           return isTamponFound;
         });
+
         setRenderPackagesData(filteredPackagesData);
-        return;
       }
     }
 
-    // current filter is not all
+    // changed filter is not all
     if (changedFilterFalue !== 'all') {
-      // is second filter is all
+      // second filter is all
       if (otherFilterValue === 'all') {
         // filter whole data for cases with changedFilterFalue only
         const filteredPackagesData = packagesData.filter((packageData) => {
@@ -54,23 +46,26 @@ const PackageFilters = ({
           return isTamponFound;
         });
         setRenderPackagesData(filteredPackagesData);
-        return;
       }
 
-      // both has selected filters
+      // both are not all
       if (otherFilterValue !== 'all') {
-        // renderPackagesData already has been filtered by the second filter
-        const filteredPackagesData = renderPackagesData.filter((packageData) => {
+        // check needs to pass both filter conditions
+        const filteredPackagesData = packagesData.filter((packageData) => {
           const tamponsData = packageData.tapons || packageData.tampons;
-          const isTamponFound = tamponsData.find((tampon) =>
-            isSize ? tampon.size === changedFilterFalue : tampon.coating === changedFilterFalue
-          );
+
+          const isTamponFound = tamponsData.find((tampon) => {
+            if (isSize) {
+              return tampon.size === changedFilterFalue && tampon.coating === otherFilterValue;
+            }
+
+            return tampon.size === otherFilterValue && tampon.coating === changedFilterFalue;
+          });
 
           return isTamponFound;
         });
 
         setRenderPackagesData(filteredPackagesData);
-        return;
       }
     }
 

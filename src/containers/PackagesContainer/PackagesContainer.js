@@ -37,7 +37,6 @@ const PackagesContainer = () => {
         packagesData={packagesData}
         allUniqueSizes={allUniqueSizes}
         allUniqueCoatings={allUniqueCoatings}
-        renderPackagesData={renderPackagesData}
         setRenderPackagesData={setRenderPackagesData}
       />
       <PackageTable renderPackagesData={renderPackagesData} />
