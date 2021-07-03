@@ -27,8 +27,8 @@ const PackagesContainer = () => {
 
   console.log('packagesData: ', packagesData);
 
-  const allUniqueSizes = getAllUnique(renderPackagesData, 'sizes');
-  const allUniqueCoatings = getAllUnique(renderPackagesData);
+  const allUniqueSizes = getAllUnique(packagesData, 'sizes');
+  const allUniqueCoatings = getAllUnique(packagesData);
 
   return (
     <>
