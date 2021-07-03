@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { uid } from 'react-uid';
+
 const PackageFilters = ({ packagesData, allUniqueSizes, allUniqueCoatings, setRenderPackagesData }) => {
   const [selectedSize, setSelectedSize] = useState('all');
   const [selectedCoating, setSelectedCoating] = useState('all');
@@ -80,7 +82,9 @@ const PackageFilters = ({ packagesData, allUniqueSizes, allUniqueCoatings, setRe
             Select Filter
           </option>
           {[...allUniqueSizes].map((size) => (
-            <option value={size}>{size}</option>
+            <option value={size} key={uid(size)}>
+              {size}
+            </option>
           ))}
           <option value='all'>Show All</option>
         </select>
@@ -91,7 +95,9 @@ const PackageFilters = ({ packagesData, allUniqueSizes, allUniqueCoatings, setRe
             Select Coating
           </option>
           {[...allUniqueCoatings].map((coating) => (
-            <option value={coating}>{coating}</option>
+            <option value={coating} key={uid(coating)}>
+              {coating}
+            </option>
           ))}
           <option value='all'>Show All</option>
         </select>

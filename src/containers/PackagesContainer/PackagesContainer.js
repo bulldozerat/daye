@@ -23,9 +23,7 @@ const PackagesContainer = () => {
     fetchPackagesData();
   }, []);
 
-  if (!packagesData) return 'loading...';
-
-  console.log('packagesData: ', packagesData);
+  if (!packagesData) return 'loading... Add loader';
 
   const allUniqueSizes = getAllUnique(packagesData, 'sizes');
   const allUniqueCoatings = getAllUnique(packagesData);

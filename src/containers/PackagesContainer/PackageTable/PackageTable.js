@@ -1,3 +1,5 @@
+import { uid } from 'react-uid';
+
 import { PackageItemRow, PriceWrapper, TamponInfoWrapper } from './PackageTableStyles';
 
 const PackageTable = ({ renderPackagesData }) => {
@@ -30,7 +32,7 @@ const PackageTable = ({ renderPackagesData }) => {
         );
 
         return (
-          <PackageItemRow>
+          <PackageItemRow key={uid(packageData)}>
             <img src={productImage} alt='' />
             <TamponInfoWrapper>
               <div>SIZES:</div>
