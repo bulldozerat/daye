@@ -6,16 +6,20 @@ export const PackageItemRow = styled.div`
   align-items: center;
   padding: 1rem 1.5rem;
   background: #fff;
-  border: 2px solid black;
+  border: 0.2rem solid black;
   margin-bottom: 1rem;
+  cursor: pointer;
   img {
     width: 10rem;
+  }
+  &:hover {
+    background: #fafafa;
   }
 `;
 
 export const PriceWrapper = styled.div`
-  font-weight: bold;
   font-size: 1.8rem;
+  font-weight: bold;
 `;
 
 export const TamponInfoWrapper = styled.div`

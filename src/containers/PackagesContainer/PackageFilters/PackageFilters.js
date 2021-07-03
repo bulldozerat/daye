@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { uid } from 'react-uid';
 
+import { PackageFilterWrapper, FilterSelectWrapper } from './PageFilterStyles';
+
 const PackageFilters = ({ packagesData, allUniqueSizes, allUniqueCoatings, setRenderPackagesData }) => {
   const [selectedSize, setSelectedSize] = useState('all');
   const [selectedCoating, setSelectedCoating] = useState('all');
@@ -75,8 +77,8 @@ const PackageFilters = ({ packagesData, allUniqueSizes, allUniqueCoatings, setRe
   };
 
   return (
-    <div>
-      <div>
+    <PackageFilterWrapper>
+      <FilterSelectWrapper>
         <select onChange={(e) => handleFilterSelectChange(e, 'size')}>
           <option value='all' disabled selected>
             Select Filter
@@ -88,8 +90,8 @@ const PackageFilters = ({ packagesData, allUniqueSizes, allUniqueCoatings, setRe
           ))}
           <option value='all'>Show All</option>
         </select>
-      </div>
-      <div>
+      </FilterSelectWrapper>
+      <FilterSelectWrapper>
         <select onChange={handleFilterSelectChange}>
           <option value='all' disabled selected>
             Select Coating
@@ -101,8 +103,8 @@ const PackageFilters = ({ packagesData, allUniqueSizes, allUniqueCoatings, setRe
           ))}
           <option value='all'>Show All</option>
         </select>
-      </div>
-    </div>
+      </FilterSelectWrapper>
+    </PackageFilterWrapper>
   );
 };
 
